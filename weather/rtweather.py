@@ -5,6 +5,7 @@ https://github.com/MZCretin/RollToolsApi#获取特定城市今日天气
 """
 import requests
 
+
 def get_rttodayweather(cityname):
     """
     获取特定城市今日天气
@@ -27,16 +28,16 @@ def get_rttodayweather(cityname):
                 address = data_dict['address'].strip()
                 if ' ' in address:
                     address = address.split(' ')[-1]
-                reportTime = data_dict['reportTime'].strip()
-                reportTime = reportTime.split(' ')[0]
+                report_time = data_dict['reportTime'].strip()
+                report_time = report_time.split(' ')[0]
                 return_text = ' '.join(
-                    x for x in [reportTime,address, data_dict['weather'], data_dict['temp'],
+                    x for x in [report_time, address, data_dict['weather'], data_dict['temp'],
                                 data_dict['windDirection'] + '风', data_dict['windPower'],
                                 '湿度：' + data_dict['humidity']] if x)
                 # print(return_text)
                 return return_text
             else:
-                print('获取天气失败:{}'.format( resp.json()['msg']))
+                print('获取天气失败:{}'.format(resp.json()['msg']))
                 return None
         print('获取天气失败。')
     except Exception as exception:
@@ -50,4 +51,3 @@ get_today_weather = get_rttodayweather
 if __name__ == '__main__':
     cityname = '全州'
     get_today_weather(cityname)
-

@@ -20,7 +20,6 @@ from main.utils import (
     get_diff_time,
 )
 
-
 reply_user_name_uuid_list = []
 FILEHELPER_MARK = ['文件传输助手', 'filehelper']  # 文件传输助手标识
 FILEHELPER = 'filehelper'
@@ -50,15 +49,15 @@ def is_online(auto_login=False):
         print('微信已离线..')
         return False
 
-    hotReload = not get_yaml().get('is_forced_switch', False)  # 切换微信号，重新扫码。
-    loginCallback = init_wechat
+    hot_reload = not get_yaml().get('is_forced_switch', False)  # 切换微信号，重新扫码。
+    login_callback = init_wechat
     for _ in range(2):  # 尝试登录 2 次。
         if os.environ.get('MODE') == 'server':
             # 命令行显示登录二维码。
-            itchat.auto_login(enableCmdQR=2, hotReload=hotReload, loginCallback=loginCallback)
+            itchat.auto_login(enableCmdQR=2, hotReload=hot_reload, loginCallback=login_callback)
             itchat.run(blockThread=False)
         else:
-            itchat.auto_login(hotReload=hotReload, loginCallback=loginCallback)
+            itchat.auto_login(hotReload=hot_reload, loginCallback=login_callback)
             itchat.run(blockThread=False)
         if _online():
             print('登录成功')
@@ -108,9 +107,8 @@ def init_wechat():
     itchat.get_chatrooms(update=True)  # 更新群信息。
 
     for name in conf.get('auto_reply_names'):
-        if name.lower() in FILEHELPER_MARK:  # 判断是否文件传输助手
-            if FILEHELPER not in reply_user_name_uuid_list:
-                reply_user_name_uuid_list.append(FILEHELPER)
+        if name.lower() in FILEHELPER_MARK and FILEHELPER not in reply_user_name_uuid_list:  # 判断是否文件传输助手
+            reply_user_name_uuid_list.append(FILEHELPER)
         friends = itchat.search_friends(name=name)
         if not friends:  # 如果用户列表为空，表示用户昵称填写有误。
             print('自动回复中的昵称『{}』有误。'.format(name))
@@ -133,7 +131,7 @@ def send_alarm_msg():
         send_msg = '\n'.join(x for x in [dictum, weather, diff_time, sweet_words] if x)
         # print(send_msg)
 
-        if not send_msg or not is_online():continue
+        if not send_msg or not is_online(): continue
         # 给微信好友发信息
         wechat_name = gf.get('wechat_name')
         if wechat_name:

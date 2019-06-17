@@ -2,6 +2,7 @@
 
 import requests
 
+
 def get_hitokoto_info():
     """
     从『一言』获取信息。(官网：https://hitokoto.cn/)
@@ -17,5 +18,6 @@ def get_hitokoto_info():
         print(exception)
         return None
     return None
+
 
 get_one_words = get_hitokoto_info

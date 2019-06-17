@@ -22,21 +22,21 @@ TULING_ERROR_CODE_LIST = [
 URL = "http://openapi.tuling123.com/openapi/api/v2"
 
 
-def get_tuling123(text, userId):
+def get_tuling123(text, user_id):
     """
     接口地址：(https://www.kancloud.cn/turing/www-tuling123-com/718227)
     获取图灵机器人对话
     :param text: 发送的话
-    :param userId: 用户唯一标识（最好用微信好友uuid）
+    :param user_id: 用户唯一标识（最好用微信好友uuid）
     :return: 对白
     """
     info = get_yaml()['turing_conf']
-    apiKey = info['apiKey']
+    api_key = info['apiKey']
 
-    if not apiKey:
+    if not api_key:
         print('图灵机器人 apikey 为空，请求出错')
         return None
-    userId = md5_encode(userId if userId else '250')
+    user_id = md5_encode(user_id if user_id else '250')
 
     content = {
         'perception': {
@@ -45,8 +45,8 @@ def get_tuling123(text, userId):
             }
         },
         'userInfo': {
-            'apiKey': apiKey,
-            'userId': userId
+            'apiKey': api_key,
+            'userId': user_id
         }
     }
     try:

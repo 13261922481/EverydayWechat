@@ -2,6 +2,7 @@
 
 import requests
 
+
 def get_lovelive_info():
     """
     从土味情话中获取每日一句。
@@ -17,5 +18,6 @@ def get_lovelive_info():
         print(exception)
         return None
     return None
+
 
 get_one_words = get_lovelive_info

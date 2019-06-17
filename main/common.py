@@ -8,6 +8,7 @@ import yaml
 from simplejson import JSONDecodeError
 import hashlib
 
+
 def get_yaml():
     """
     解析 yaml
@@ -30,7 +31,7 @@ def is_json(resp):
     """
     判断数据是否能被 Json 化。 True 能，False 否。
     :param resp: request.
-    :return: bool, True 数据可 Json 化；False 不能 JOSN 化。
+    :return: bool, True 数据可 Json 化；False 不能 Json 化。
     """
     try:
         resp.json()
@@ -38,11 +39,13 @@ def is_json(resp):
     except JSONDecodeError:
         return False
 
+
 def md5_encode(text):
     md5 = hashlib.md5()
     md5.update(text.encode('utf-8'))
-    encodedStr = md5.hexdigest().upper()
-    return encodedStr
+    encoded_text = md5.hexdigest().upper()
+    return encoded_text
+
 
 if __name__ == '__main__':
     get_yaml()

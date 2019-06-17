@@ -44,7 +44,7 @@ def get_weather_info(cityname):
     # return get_rttodayweather(cityname)
 
 
-def get_bot_info(message, userId=''):
+def get_bot_info(message, user_id=''):
     """
     获取自动回复的话。
     # 优先获取图灵机器人API的回复，但失效时，会使用青云客智能聊天机器人API(过时)
@@ -55,7 +55,7 @@ def get_bot_info(message, userId=''):
     source = BOT_NAME_DICT.get(channel, 'qingyunke')
     if source:
         addon = importlib.import_module('bot.' + source, __package__)
-        reply_msg = addon.get_auto_reply(message, userId)
+        reply_msg = addon.get_auto_reply(message, user_id)
         return reply_msg
     # reply_msg = get_tuling123(message)
     # if not reply_msg:

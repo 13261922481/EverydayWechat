@@ -8,6 +8,7 @@ HEADERS = {
                   'Chrome/67.0.3396.87 Safari/537.36',
 }
 
+
 def get_wufazhuce_info():
     """
     获取格言信息（从『一个。one』获取信息 http://wufazhuce.com/）

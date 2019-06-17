@@ -9,6 +9,7 @@ from main.common import (
     is_json
 )
 
+
 def get_acib_info():
     """
     从词霸中获取每日一句，带英文。
@@ -29,5 +30,6 @@ def get_acib_info():
         print(exception)
         return None
     return None
+
 
 get_one_words = get_acib_info
